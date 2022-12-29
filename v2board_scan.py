@@ -38,13 +38,13 @@ async def fetch_v2(url: str):
 
 async def main():
     urls = []
-    with open(r"v2bfull_url.txt", 'r', encoding='utf-8') as fp:
+    with open(r"v2burl.txt", 'r', encoding='utf-8') as fp:
         for f in fp:
             urls.append(f)
     tasks = [asyncio.create_task(fetch_v2(url)) for url in urls]
     async with asyncio.Semaphore(10):
         await asyncio.gather(*tasks)
-    with open('./v2board_scan_clean_plus1.txt', 'a+', encoding='utf-8') as fp1:
+    with open('./v2board_scan_clean_plus.txt', 'a+', encoding='utf-8') as fp1:
         for v2 in v2_data_clean:
             fp1.write(v2 + '\n')
 
